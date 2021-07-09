@@ -40,6 +40,9 @@ print('loss : ', loss)
 result = model.predict(x_pred)
 print('예측값 : ', result)
 
-plt.scatter(x[:,:1],y)
+plt.scatter(x[:,0],y)
+plt.scatter(x[:,1],y)
+plt.scatter(x[:,2],y)
+
 plt.plot(x,y, color='red')
 plt.show()

@@ -1,6 +1,7 @@
 from numpy.core.fromnumeric import transpose
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
+import matplotlib.pyplot as plt
 import numpy as np
 
 #1. 데이터
@@ -41,7 +42,7 @@ model.add(Dense(3))
 # #3. 컴파일 훈련
 model.compile(loss='mse', optimizer='adam')
 
-model.fit(x, y, epochs=1000, batch_size=1)
+model.fit(x, y, epochs=100, batch_size=1)
 
 # #4. 평가 예측
 loss = model.evaluate(x, y)
@@ -49,3 +50,11 @@ print('loss : ', loss)
 
 result = model.predict(x_pred)
 print('예측값 : ', result)
+
+plt.scatter(x,y[:,0])
+plt.scatter(x,y[:,1])
+plt.scatter(x,y[:,2])
+
+
+plt.plot(x,y, color='red')
+plt.show()
