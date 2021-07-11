@@ -29,34 +29,78 @@ y = np.array(range(1, 101))
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.7, shuffle=True, random_state=66)
 
-print()
+print(x_test)
+#[ 8 93  4  5 52 41  0 73 88 68 25 18 26 29 66 50 80 45 38 58 49 85 94 87
+#  15  3 14 33 23 24]
+print(y_test)
+#[ 9 94  5  6 53 42  1 74 89 69 26 19 27 30 67 51 81 46 39 59 50 86 95 88
+#  16  4 15 34 24 25]
+
 #2. 모델 구성
 model = Sequential()
-model.add(Dense(6, input_dim=1))
-model.add(Dense(5))
-model.add(Dense(4))
-model.add(Dense(3))
-model.add(Dense(2))
+model.add(Dense(1000, input_dim=1))
+model.add(Dense(10))
+model.add(Dense(1000))
+model.add(Dense(10))
+model.add(Dense(1000))
+model.add(Dense(10))
+model.add(Dense(1000))
 model.add(Dense(1))
 
 #3. 컴파일, 훈련
 model.compile(loss='mse', optimizer='adam')
 
-model.fit(x_train, y_train, epochs=100, batch_size=1)
+model.fit(x_train, y_train, epochs=120, batch_size=1)
 
 #4. 평가, 예측
 loss = model.evaluate(x_test, y_test)
 print('loss : ', loss)
 
-y_predict = model.predict(x_test)
-print('101의 예측값 : ', y_predict)
-
-# y_predict = model.predict(x)
-
-# plt.scatter(x,y)
-# plt.plot(x,y_predict, color='red')
-# plt.show()
+y_predict = model.predict([y_test])
+print('100의 예측값 : ', y_predict)
 
 r2 = r2_score(y_test, y_predict)
 
 print("r2스코어 :", r2)
+
+
+#5. 시각화
+# plt.scatter(x,y)
+# plt.plot(x,y_predict, color='red')
+# plt.show()
+
+
+'''
+loss :  0.001323983888141811
+100의 예측값 :  [[10.052702 ]
+ [94.99945  ]
+ [ 6.0552063]
+ [ 7.0545793]
+ [54.025127 ]
+ [43.03202  ]
+ [ 2.0577111]
+ [75.01198  ]
+ [90.00259  ]
+ [70.01512  ]
+ [27.042055 ]
+ [20.046434 ]
+ [28.041424 ]
+ [31.039547 ]
+ [68.016365 ]
+ [52.026386 ]
+ [82.00761  ]
+ [47.02951  ]
+ [40.0339   ]
+ [60.021374 ]
+ [51.027008 ]
+ [87.00446  ]
+ [95.99883  ]
+ [89.00322  ]
+ [17.048317 ]
+ [ 5.055832 ]
+ [16.048939 ]
+ [35.03704  ]
+ [25.043303 ]
+ [26.042679 ]]
+r2스코어 : 0.9987846660979255
+'''
