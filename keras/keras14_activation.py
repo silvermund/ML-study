@@ -24,13 +24,10 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.7, shuffl
 
 #2. 모델구성
 model = Sequential()
-model.add(Dense(2048, input_dim=10)) 
-model.add(Dense(1024, activation='relu'))
-model.add(Dense(512, activation='relu'))
-model.add(Dense(256, activation='relu'))
-model.add(Dense(128, activation='relu'))
-model.add(Dense(64, activation='relu'))
-model.add(Dense(8, activation='relu'))
+model.add(Dense(128, input_dim=10, activation='relu')) 
+model.add(Dense(32, activation='relu'))  # 활성화함수. 모든 레이어에 존재
+model.add(Dense(32, activation='relu'))
+model.add(Dense(16, activation='relu'))
 model.add(Dense(1))
 
 #3. 컴파일, 훈련
@@ -50,11 +47,3 @@ print('x_predict의 예측값 : ', y_predict)
 r2 = r2_score(y, y_predict)
 
 print("r2스코어 :", r2)
-
-#과제1
-#0.62 까지 올릴것!!!
-#깃헙 주소를 메일에 보낼 것!
-'''
-r2스코어 : 0.5631736941367476
-'''
-
