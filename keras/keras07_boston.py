@@ -33,7 +33,7 @@ model.add(Dense(1))
 
 model.compile(loss='mse', optimizer='adam')
 
-model.fit(x, y, epochs=100, batch_size=1)
+model.fit(x, y, epochs=10000, batch_size=1)
 
 loss = model.evaluate(x, y)
 print('loss : ', loss)
