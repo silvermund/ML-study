@@ -1,36 +1,67 @@
-# 완성하시오!!!
-# acc 0.8 이상 만들것
-
-
 from tensorflow.keras.models import Sequential, Model
 from tensorflow.keras.layers import Dense, Input, concatenate, Concatenate
 from tensorflow.keras.callbacks import EarlyStopping
 from tensorflow.keras.utils import to_categorical
 import numpy as np
+import pandas as pd
 # from sklearn import datasets
 from sklearn.metrics import r2_score
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler, StandardScaler, QuantileTransformer, PowerTransformer
 from sklearn.datasets import load_wine
+from sklearn.preprocessing import OneHotEncoder
 import matplotlib.pyplot as plt
 
-datasets = load_wine()
+datasets = pd.read_csv('../_data/winequality-white.csv', sep=';', index_col=None, header=0)
 
-print(datasets.DESCR)
-print(datasets.feature_names)
+# ./  : 현재폴더
+# ../ : 상위폴더
+
+# print(datasets)
+# print(datasets.shape) # (4898, 12)
+
+# 11개까지 x, 마지막 1개 quality가 y
+
+# print(datasets.info())
+# print(datasets.describe())
+
+# 다중분류
+# 모델링하고
+# 0.8 이상 완성!!!
+
 
 #1. 데이터
-x = datasets.data
-y = datasets.target
+np = datasets.values
 
-print(x.shape, y.shape) # (178, 13) (178,)
+
+x = np[:,:11]
+y = np[:,11:]
+
+print(x)
+print('-----------------------------------------')
+print(y)
+
+#1. 판다스 -> 넘파이
+#2. x와 y를 분리
+#3. sklearn의 onehot??? 사용할 것 
+#4. y의 라벨을 확인 np.unique(y)
+#5. y의 shape 확인 (4898, ) -> (4898,7)
+
+
+print(x.shape, y.shape) # (4898, 11) (4898, 1)
 
 print(y) # y가 0,1,2
-print(np.unique(y))
+# print(np.unique(y))
 
-y = to_categorical(y)
+ohe = OneHotEncoder(sparse=False)
+y = ohe.fit_transform(y)
 
-print(y.shape) # (178, 3)
+# y = to_categorical(y)
+
+print(y[:5])
+print(y.shape) # (4898, 7)
+
+print(type(x), type(y))
 
 
 # 데이터 전처리
@@ -43,19 +74,19 @@ x_test = scaler.transform(x_test)
 
 #2. 모델 구성
 model = Sequential()
-model.add(Dense(128, activation='relu', input_shape=(13,))) 
+model.add(Dense(128, activation='relu', input_shape=(11,))) 
 model.add(Dense(64, activation='relu'))
 model.add(Dense(64, activation='relu'))
 model.add(Dense(64, activation='relu'))
 model.add(Dense(64, activation='relu'))
-model.add(Dense(3, activation='softmax'))
+model.add(Dense(7, activation='softmax'))
 
 #3. 컴파일, 훈련
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 es = EarlyStopping(monitor='loss', patience=5, mode='min', verbose=1)
 
-hist = model.fit(x_train, y_train, epochs=100, batch_size=8, validation_split=0.2, callbacks=[es])
+hist = model.fit(x_train, y_train, epochs=100, batch_size=16, validation_split=0.2, callbacks=[es])
 
 # print(hist.history.keys())
 # print("================================")
@@ -85,9 +116,19 @@ print(y_predict)
 # plt.ylabel('loss, val_loss')
 # plt.legend(['train loss','val loss'])
 # plt.show()
-
 '''
+loss :  1.8325819969177246
+accuracy :  0.5442177057266235
+
+원핫인코더
+loss :  1.6113581657409668
+accuracy :  0.5673469305038452
+
 StandardScaler
-loss :  0.10703888535499573
-accuracy :  0.9814814925193787
+loss :  2.4856913089752197
+accuracy :  0.5965986251831055
+
+PowerTransformer
+loss :  2.5612287521362305
+accuracy :  0.6000000238418579
 '''
