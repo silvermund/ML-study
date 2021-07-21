@@ -54,7 +54,7 @@ print(x_train.shape, y_train.shape) #(50000, 32, 32, 3) (50000, 10)
 print(x_test.shape, y_test.shape)  #(10000, 32, 32, 3) (10000, 10)
 
 #2. 모델 구성
-model = Sequential()
+# model = Sequential()
 # model.add(Dense(128, activation='relu', input_shape=(32 * 32 * 3,)))
 # model.add(Dense(256, activation='relu'))
 # model.add(Dense(512, activation='relu'))
@@ -65,25 +65,27 @@ model = Sequential()
 
 # model.summary()
 
-input1 = Input(shape=(32*32, 3))
-xx = LSTM(4, activation='relu')(input1)
-xx = Dense(2, activation='relu')(xx)
-output1 = Dense(10, activation='softmax')(xx)
+# input1 = Input(shape=(32*32, 3))
+# xx = LSTM(4, activation='relu')(input1)
+# xx = Dense(2, activation='relu')(xx)
+# output1 = Dense(10, activation='softmax')(xx)
 
-model = Model(inputs=input1, outputs=output1)
+# model = Model(inputs=input1, outputs=output1)
 
 
 #3. 컴파일, 훈련
-model.compile(loss='categorical_crossentropy', optimizer='adam', metrics='acc')
+# model.compile(loss='categorical_crossentropy', optimizer='adam', metrics='acc')
 
-es = EarlyStopping(monitor='loss', patience=10, mode='min', verbose=1)
+# es = EarlyStopping(monitor='loss', patience=10, mode='min', verbose=1)
 
 start_time = time.time()
-hist = model.fit(x_train, y_train, epochs=10, batch_size=2048, validation_split=0.2, callbacks=[es])
+# hist = model.fit(x_train, y_train, epochs=10, batch_size=2048, validation_split=0.2, callbacks=[es])
 end_time = time.time() - start_time
 
-model.save('./_save/ModelCheckPoint/keras48_model_save.hdf5')
+# model.save('./_save/ModelCheckPoint/keras48_model_save.hdf5')
 
+# model = load_model('./_save/ModelCheckPoint/keras48_8_model_save.hdf5')
+model = load_model('./_save/ModelCheckPoint/keras48_8_MCP.hdf5')
 
 #4. 평가, 예측
 loss = model.evaluate(x_test, y_test)

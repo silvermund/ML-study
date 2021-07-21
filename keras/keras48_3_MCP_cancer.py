@@ -43,7 +43,7 @@ print(x_test.shape) #(171, 30, 1)
 
 
 #2. 모델 구성
-model = Sequential()
+# model = Sequential()
 # model.add(Conv1D(filters=8, kernel_size=2, padding='same', input_shape=(30,1)))
 # model.add(Dropout(0.2))
 # model.add(Conv1D(8, 2, padding='same', activation='relu'))   
@@ -66,27 +66,28 @@ model = Sequential()
 # model.add(Dense(4, activation='relu'))
 # model.add(Dense(1))
 
-model.add(Conv1D(64, 2, input_shape=(30, 1)))
-model.add(Flatten())
-model.add(Dense(10))
-model.add(Dense(1))
+# model.add(Conv1D(64, 2, input_shape=(30, 1)))
+# model.add(Flatten())
+# model.add(Dense(10))
+# model.add(Dense(1))
 
 
 #3. 컴파일, 훈련
-model.compile(loss='mse', optimizer='adam')
+# model.compile(loss='mse', optimizer='adam')
 
-es = EarlyStopping(monitor='val_loss', patience=30, mode='min', verbose=1)
-cp = ModelCheckpoint(monitor='val_loss', save_best_only=True, mode='auto', filepath='./_save/ModelCheckPoint/keras48_3_MCP.hdf5')
+# es = EarlyStopping(monitor='val_loss', patience=30, mode='min', verbose=1)
+# cp = ModelCheckpoint(monitor='val_loss', save_best_only=True, mode='auto', filepath='./_save/ModelCheckPoint/keras48_3_MCP.hdf5')
 
 
 start_time = time.time()
-model.fit(x_train, y_train, epochs=100, batch_size=4, validation_split=0.25, callbacks=[es, cp])
+# model.fit(x_train, y_train, epochs=100, batch_size=4, validation_split=0.25, callbacks=[es, cp])
 end_time = time.time() - start_time
 
 
 # model.save('./_save/ModelCheckPoint/keras48_3_model_save.hdf5')
 
-
+# model = load_model('./_save/ModelCheckPoint/keras48_3_model_save.hdf5')
+model = load_model('./_save/ModelCheckPoint/keras48_3_MCP.hdf5')
 
 #4. 평가, 예측
 y_predict = model.predict([x_test])

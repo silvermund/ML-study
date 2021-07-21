@@ -44,39 +44,41 @@ x_train = x_test.reshape(10000, 784, 1)
 
 
 #2. 모델 구성
-model = Sequential()
-# model.add(Dense(128, activation='relu', input_shape=(28 * 28,)))
-# model.add(Dense(256, activation='relu'))
-# model.add(Dense(512, activation='relu'))
-# model.add(Dense(256, activation='relu'))
-# model.add(Dense(128, activation='relu'))
-# model.add(Dense(64, activation='relu'))
-# model.add(Dense(10, activation='softmax'))
+# model = Sequential()
+# # model.add(Dense(128, activation='relu', input_shape=(28 * 28,)))
+# # model.add(Dense(256, activation='relu'))
+# # model.add(Dense(512, activation='relu'))
+# # model.add(Dense(256, activation='relu'))
+# # model.add(Dense(128, activation='relu'))
+# # model.add(Dense(64, activation='relu'))
+# # model.add(Dense(10, activation='softmax'))
 
-input1 = Input(shape=(28*28, 1))
-xx = LSTM(4, activation='relu')(input1)
-xx = Dense(2, activation='relu')(xx)
-output1 = Dense(10, activation='softmax')(xx)
+# input1 = Input(shape=(28*28, 1))
+# xx = LSTM(4, activation='relu')(input1)
+# xx = Dense(2, activation='relu')(xx)
+# output1 = Dense(10, activation='softmax')(xx)
 
-model = Model(inputs=input1, outputs=output1)
+# model = Model(inputs=input1, outputs=output1)
 
 # model.summary()
 
 
 
 #3. 컴파일, 훈련
-model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+# model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
-es = EarlyStopping(monitor='loss', patience=20, mode='min', verbose=1)
-cp = ModelCheckpoint(monitor='val_loss', save_best_only=True, mode='auto', filepath='./_save/ModelCheckPoint/keras48_7_MCP.hdf5')
+# es = EarlyStopping(monitor='loss', patience=20, mode='min', verbose=1)
+# cp = ModelCheckpoint(monitor='val_loss', save_best_only=True, mode='auto', filepath='./_save/ModelCheckPoint/keras48_7_MCP.hdf5')
 
 
 start_time = time.time()
-hist = model.fit(x_train, y_train, epochs=100, batch_size=2048, validation_split=0.2, callbacks=[es, cp])
+# hist = model.fit(x_train, y_train, epochs=100, batch_size=2048, validation_split=0.2, callbacks=[es, cp])
 end_time = time.time() - start_time
 
 # model.save('./_save/ModelCheckPoint/keras48_7_model_save.hdf5')
 
+# model = load_model('./_save/ModelCheckPoint/keras48_7_model_save.hdf5')
+model = load_model('./_save/ModelCheckPoint/keras48_7_MCP.hdf5')
 
 #4. 평가, 예측
 loss = model.evaluate(x_test, y_test)

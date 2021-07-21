@@ -47,7 +47,7 @@ x_train = x_train.reshape(50000, 32*32, 3)
 x_test = x_test.reshape(10000, 32*32, 3)
 
 #2. 모델 구성
-model = Sequential()
+# model = Sequential()
 # model.add(Dense(128, activation='relu', input_shape=(32 * 32 * 3,)))
 # model.add(Dense(256, activation='relu'))
 # model.add(Dense(512, activation='relu'))
@@ -58,25 +58,28 @@ model = Sequential()
 
 # model.summary()
 
-input1 = Input(shape=(32*32, 3))
-xx = LSTM(4, activation='relu')(input1)
-xx = Dense(2, activation='relu')(xx)
-output1 = Dense(100, activation='softmax')(xx)
+# input1 = Input(shape=(32*32, 3))
+# xx = LSTM(4, activation='relu')(input1)
+# xx = Dense(2, activation='relu')(xx)
+# output1 = Dense(100, activation='softmax')(xx)
 
-model = Model(inputs=input1, outputs=output1)
+# model = Model(inputs=input1, outputs=output1)
 
 
 #3. 컴파일, 훈련
-model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+# model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
-es = EarlyStopping(monitor='loss', patience=5, mode='min', verbose=1)
-cp = ModelCheckpoint(monitor='val_loss', save_best_only=True, mode='auto', filepath='./_save/ModelCheckPoint/keras48_9_MCP.hdf5')
+# es = EarlyStopping(monitor='loss', patience=5, mode='min', verbose=1)
+# cp = ModelCheckpoint(monitor='val_loss', save_best_only=True, mode='auto', filepath='./_save/ModelCheckPoint/keras48_9_MCP.hdf5')
 
 start_time = time.time()
-hist = model.fit(x_train, y_train, epochs=10, batch_size=2048, validation_split=0.2, callbacks=[es, cp])
+# hist = model.fit(x_train, y_train, epochs=10, batch_size=2048, validation_split=0.2, callbacks=[es, cp])
 end_time = time.time() - start_time
 
 # model.save('./_save/ModelCheckPoint/keras48_9_model_save.hdf5')
+
+# model = load_model('./_save/ModelCheckPoint/keras48_9_model_save.hdf5')
+model = load_model('./_save/ModelCheckPoint/keras48_9_MCP.hdf5')
 
 
 #4. 평가, 예측
@@ -140,5 +143,8 @@ model
 loss :  4.605245590209961
 accuracy :  0.00989999994635582
 
-
+MCP
+걸린 시간 :  637.5085225105286
+loss :  4.618588447570801
+accuracy :  0.00989999994635582
 '''

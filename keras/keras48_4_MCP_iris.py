@@ -1,4 +1,4 @@
-from tensorflow.keras.models import Sequential, Model
+from tensorflow.keras.models import Sequential, Model, load_model
 from tensorflow.keras.layers import Dense, Input, concatenate, Concatenate, Conv1D, Flatten, MaxPool1D, Dropout, GlobalAveragePooling1D, LSTM
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
 from tensorflow.keras.utils import to_categorical
@@ -53,7 +53,7 @@ print(x_test.shape) #(45, 4, 1)
 
 
 #2. 모델 구성
-model = Sequential()
+# model = Sequential()/
 # model.add(Conv1D(filters=8, kernel_size=2, padding='same', input_shape=(4,1)))
 # model.add(Dropout(0.2))
 # model.add(Conv1D(8, 2, padding='same', activation='relu'))   
@@ -76,24 +76,27 @@ model = Sequential()
 # model.add(Dense(4, activation='relu'))
 # model.add(Dense(3))
 
-model.add(Conv1D(64, 2, input_shape=(4, 1)))
-model.add(Flatten())
-model.add(Dense(10))
-model.add(Dense(3))
+# model.add(Conv1D(64, 2, input_shape=(4, 1)))
+# model.add(Flatten())
+# model.add(Dense(10))
+# model.add(Dense(3))
 
 
 #3. 컴파일, 훈련
-model.compile(loss='categorical_crossentropy', optimizer='adam', metrics='acc')
+# model.compile(loss='categorical_crossentropy', optimizer='adam', metrics='acc')
 
-es = EarlyStopping(monitor='loss', patience=5, mode='min', verbose=1)
-cp = ModelCheckpoint(monitor='val_loss', save_best_only=True, mode='auto', filepath='./_save/ModelCheckPoint/keras48_4_MCP.hdf5')
+# es = EarlyStopping(monitor='loss', patience=5, mode='min', verbose=1)
+# cp = ModelCheckpoint(monitor='val_loss', save_best_only=True, mode='auto', filepath='./_save/ModelCheckPoint/keras48_4_MCP.hdf5')
 
 
 start_time = time.time()
-model.fit(x_train, y_train, epochs=100, batch_size=4, validation_split=0.25, callbacks=[es, cp])
+# model.fit(x_train, y_train, epochs=100, batch_size=4, validation_split=0.25, callbacks=[es, cp])
 end_time = time.time() - start_time
 
-model.save('./_save/ModelCheckPoint/keras48_4_model_save.hdf5')
+# model.save('./_save/ModelCheckPoint/keras48_4_model_save.hdf5')
+
+# model = load_model('./_save/ModelCheckPoint/keras48_4_model_save.hdf5')
+model = load_model('./_save/ModelCheckPoint/keras48_4_MCP.hdf5')
 
 # 4. 평가 예측
 loss = model.evaluate(x_test, y_test)
