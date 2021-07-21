@@ -1,7 +1,9 @@
 import numpy as np
 
 a = np.array(range(1, 11))
-size = 5
+
+
+size = None
 
 def split_x(dataset, size):
     aaa = []
