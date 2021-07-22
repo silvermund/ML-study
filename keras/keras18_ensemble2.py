@@ -16,7 +16,10 @@ x2 = np.transpose(x2)
 y1 = np.array(range(1001, 1101))
 y2 = np.array(range(1901, 2001))
 
-
+print(x1.shape)
+print(x2.shape)
+print(y1.shape)
+print(y2.shape)
 
 #실습
 x1_train, x1_test, x2_train, x2_test, y1_train, y1_test, y2_train, y2_test = train_test_split(x1, x2, y1, y2, train_size=0.7, random_state=66) 

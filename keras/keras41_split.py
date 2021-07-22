@@ -1,9 +1,9 @@
 import numpy as np
 
 a = np.array(range(1, 11))
+print(a)
 
-
-size = None
+size = 5
 
 def split_x(dataset, size):
     aaa = []
@@ -16,8 +16,8 @@ dataset = split_x(a, size)
 
 print(dataset)
 
-x = dataset[:, :4]
-y = dataset[:, 4]
+# x = dataset[:, :-1]
+# y = dataset[:, -1]
 
-print("x : \n", x)
-print("y : ", y)
+# print("x : \n", x)
+# print("y : ", y)

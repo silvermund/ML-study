@@ -11,6 +11,9 @@ datasets = load_diabetes()
 x = datasets.data
 y = datasets.target
 
+print(x)
+print(y)
+
 print(x.shape, y.shape) #(442,10) (442,)
 
 print(datasets.feature_names) #['age', 'sex', 'bmi', 'bp', 's1', 's2', 's3', 's4', 's5', 's6']

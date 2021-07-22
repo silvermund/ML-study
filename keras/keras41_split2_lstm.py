@@ -53,9 +53,9 @@ x = dataset[:, :-1]
 y = dataset[:, -1]
 x_predict = x_predict[:, :-1]
 
-# print("x : \n", x)
-# print("y : ", y)
-
+print("x : \n", x)
+print("y : ", y)
+'''
 x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.7, shuffle=True, random_state=66)
 
 scaler = MinMaxScaler()
@@ -110,7 +110,8 @@ print('걸린 시간 : ', end_time)
 print("r2스코어 :", r2)
 
 '''
-rmse score :  5.6713620287637205
-걸린 시간 :  8.062105655670166
-r2스코어 : 0.9516381813120058
+# rmse score :  5.6713620287637205
+# 걸린 시간 :  8.062105655670166
+# r2스코어 : 0.9516381813120058
+'''
 '''

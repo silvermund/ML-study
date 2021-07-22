@@ -15,6 +15,10 @@ x2 = np.transpose(x2)
 # y1 = np.transpose(y1)
 y = np.array(range(1001, 1101))
 
+print(x1)
+print(x2)
+
+'''
 print(x1.shape, x2.shape, y.shape) # (100, 3) (100, 3) (100,)
 
 #실습
@@ -57,3 +61,4 @@ results = model.evaluate([x1_test, x2_test], y_test)
 print("loss :", results[0])
 print("metrics['mae'] : ", results[1])
 
+'''
