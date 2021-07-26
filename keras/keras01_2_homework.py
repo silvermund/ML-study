@@ -6,6 +6,9 @@ x = [1,2,3,4,5]
 y = [1,2,3,4,5]
 x_pred = [6]
 
+
+print(x.shape)
+
 # 완성한 뒤, 출력결과스샷 후 메일로 보내기(loss, pred)
 
 model = Sequential()
