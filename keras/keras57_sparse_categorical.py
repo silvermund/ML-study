@@ -56,7 +56,7 @@ model.add(Dense(64))
 model.add(Dense(32))
 model.add(Dense(16))
 model.add(Dense(8))
-model.add(Dense(10, activation='sigmoid'))
+model.add(Dense(10, activation='softmax'))
 
 model.summary()
 '''
@@ -86,10 +86,9 @@ dense_3 (Dense)              (None, 1)                 33
 #2. 모델 구성
 
 #3. 컴파일, 훈련
-model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 es = EarlyStopping(monitor='loss', patience=5, mode='min', verbose=1)
-
 
 model.fit(x_train, y_train, epochs=100, batch_size=8, validation_split=0.2, callbacks=[es])
 

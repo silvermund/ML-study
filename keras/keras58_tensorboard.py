@@ -1,6 +1,6 @@
 from tensorflow.keras.models import Sequential, Model
 from tensorflow.keras.layers import Dense, Input, concatenate, Concatenate, Conv2D, Flatten, MaxPool2D
-from tensorflow.keras.callbacks import EarlyStopping
+from tensorflow.keras.callbacks import EarlyStopping, TensorBoard
 from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.datasets import mnist
 import numpy as np
@@ -89,9 +89,9 @@ dense_3 (Dense)              (None, 1)                 33
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 es = EarlyStopping(monitor='loss', patience=5, mode='min', verbose=1)
+tb = TensorBoard(log_dir='./_save/_graph', histogram_freq=0, write_graph=True, write_images=True)
 
-
-model.fit(x_train, y_train, epochs=100, batch_size=8, validation_split=0.2, callbacks=[es])
+model.fit(x_train, y_train, epochs=20, batch_size=1024, validation_split=0.2, callbacks=[es, tb])
 
 # print(hist.history.keys())
 # print("================================")
