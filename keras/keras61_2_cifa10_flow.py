@@ -1,4 +1,13 @@
-from tensorflow.keras.datasets import fashion_mnist
+# 훈련데이터를 10만개로 증폭할 것!!
+# 완료 후 기존 모델과 비교
+# save_dir도 temp에 넣을 것
+# 증폭데이터는 temp에 저장 후 훈련 끝난 후 결과 본 뒤 삭제
+
+# flow to 100,000 
+# make model and compare with banila
+# save_dir -> temp and delete
+
+from tensorflow.keras.datasets import cifar10
 from tensorflow.keras.preprocessing import sequence
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.preprocessing.text import Tokenizer
@@ -12,7 +21,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import time
 
-(x_train, y_train), (x_test, y_test) = fashion_mnist.load_data()
+(x_train, y_train), (x_test, y_test) = cifar10.load_data()
 
 
 train_datagen = ImageDataGenerator(
@@ -40,25 +49,29 @@ train_datagen = ImageDataGenerator(
 # 2. 파일에서 땡겨오려면 -> flow_from_directory() // x, y가 튜플 형태로 뭉쳐있어
 # 3. 데이터에서 땡겨오려면 -> flow()              // x, y가 나눠있어
 
-augment_size=40000
+augment_size = 50000
 
 randidx = np.random.randint(x_train.shape[0], size=augment_size)
-# print(x_train.shape[0])     #60000
-# print(randidx)              # [59679  9431   940 ... 54751 36349  4697]
-# print(randidx.shape)        #(40000,)
+print(x_train.shape[0])     #50000
+print(randidx)              # [24106 22472 20189 ... 10321 35247 47771]
+print(randidx.shape)        #(50000,)
 
 x_augmented = x_train[randidx].copy()
 y_augmented = y_train[randidx].copy()
 
-# print(x_augmented.shape) #(40000, 28, 28)
+print(x_augmented.shape) #(50000, 32, 32, 3)
 
 
-x_augmented = x_augmented.reshape(x_augmented.shape[0], 28, 28, 1)
-x_train = x_train.reshape(x_train.shape[0], 28, 28, 1)
-x_test = x_test.reshape(x_test.shape[0], 28, 28, 1)
+x_augmented = x_augmented.reshape(x_augmented.shape[0], 32, 32, 3)
+x_train = x_train.reshape(x_train.shape[0], 32, 32, 3)
+x_test = x_test.reshape(x_test.shape[0], 32, 32, 3)
+
 
 x_augmented = train_datagen.flow(x_augmented, np.zeros(augment_size),
-                                batch_size=augment_size, shuffle=False).next()[0]
+                                batch_size=augment_size, shuffle=False,
+                                #save_to_dir='../temp/'  # 이번파일은 요놈이 주인공!!
+                                ).next()[0]
+
 
 # print(x_augmented.shape) #(40000, 28, 28, 1)
 
@@ -67,10 +80,9 @@ x_train = np.concatenate((x_train, x_augmented))
 y_train = np.concatenate((y_train, y_augmented))
 
 # print(x_train.shape, y_train.shape) #(100000, 28, 28, 1) (100000,)
-# print(x_test.shape, y_test.shape) #(10000, 28, 28, 1) (10000,)
 
-x_train = x_train.reshape(100000, 28, 28, 1)
-x_test = x_test.reshape(10000, 28, 28, 1)
+x_train = x_train.reshape(100000, 32, 32, 3)
+x_test = x_test.reshape(10000, 32, 32, 3)
 y_train = y_train.reshape(100000, 1)
 y_test = y_test.reshape(10000, 1)
 
@@ -84,7 +96,7 @@ print(x_test.shape, y_test.shape)
 # 2. 모델
 
 model = Sequential()
-model.add(Conv2D(filters=100, kernel_size=(2,2), padding='same', input_shape=(28, 28, 1)))
+model.add(Conv2D(filters=100, kernel_size=(2,2), padding='same', input_shape=(32, 32, 3)))
 model.add(Conv2D(20, (2,2), activation='relu'))    
 model.add(Conv2D(30, (2,2), padding='valid')) 
 model.add(MaxPool2D())
@@ -122,13 +134,11 @@ print('걸린 시간 : ', end_time)
 print("acc : ", acc[-1])
 print("val_acc : ", val_acc[-1])
 
+# before flow
 
 
-# 모델 완성!!
-# 비교 대상? loss, val_loss, acc, val_acc
-# 기존 fashion_mnist와 결과 비교
-# 2시 40분까지!!!
 
-# 걸린 시간 :  169.20973587036133
-# acc :  0.9518749713897705
-# val_acc :  0.7979999780654907
+# after flow
+# 걸린 시간 :  223.25951552391052
+# acc :  0.8421124815940857
+# val_acc :  0.5162000060081482

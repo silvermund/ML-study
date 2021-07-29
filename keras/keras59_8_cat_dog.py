@@ -1,5 +1,5 @@
-# 실습
-# categorical_crossentropy 와 sigmoid 조합
+# # 실습
+# # categorical_crossentropy 와 sigmoid 조합
 
 
 # import numpy as np
@@ -22,7 +22,7 @@
 #     '../_data/cat_dog/training_set',
 #     target_size=(150, 150),
 #     batch_size=8100,
-#     class_mode='binary',
+#     class_mode='categorical',
 #     classes=['cats','dogs'],
 #     shuffle=True
 # )
@@ -32,30 +32,30 @@
 #     '../_data/cat_dog/test_set',
 #     target_size=(150, 150),
 #     batch_size=8100,
-#     class_mode='binary',
+#     class_mode='categorical',
 #     classes=['cats','dogs'],
 #     shuffle=True
 # )
 
-# print(xy_train[0])
-# y가 5개 = batch_size
-# print(train[0][0])        # x값
-# print(train[0][1])        # y값
-# print(xy_train[0][2])      # 없음
+# # print(xy_train[0])
+# # y가 5개 = batch_size
+# # print(train[0][0])        # x값
+# # print(train[0][1])        # y값
+# # print(xy_train[0][2])      # 없음
 
 # print(train[0][0].shape, train[0][1].shape)     # (8005, 150, 150, 3) (8005,)
 # print(test[0][0].shape, test[0][1].shape)       # (2023, 150, 150, 3) (2023,)
 
 
 
-# 160 / 5 = 32 => [0]~[31]
-# [31][0] = 0, [31][0] = 1
-# print(xy_train[32][1]) => 없음
+# # 160 / 5 = 32 => [0]~[31]
+# # [31][0] = 0, [31][0] = 1
+# # print(xy_train[32][1]) => 없음
 
-# print(type(xy_train))           #<class 'tensorflow.python.keras.preprocessing.image.DirectoryIterator'>
-# print(type(xy_train[0]))        #<class 'tuple'>
-# print(type(xy_train[0][0]))     #<class 'numpy.ndarray'>
-# print(type(xy_train[0][1]))     #<class 'numpy.ndarray'>
+# # print(type(xy_train))           #<class 'tensorflow.python.keras.preprocessing.image.DirectoryIterator'>
+# # print(type(xy_train[0]))        #<class 'tuple'>
+# # print(type(xy_train[0][0]))     #<class 'numpy.ndarray'>
+# # print(type(xy_train[0][1]))     #<class 'numpy.ndarray'>
 
 
 # np.save('./_save/_npy/k59_8_train_x.npy', arr=train[0][0])
@@ -97,7 +97,7 @@ model.add(Dropout(0.2))
 model.add(Flatten())
 model.add(Dense(64, activation= 'relu'))
 model.add(Dense(16, activation= 'relu'))
-model.add(Dense(1, activation= 'sigmoid'))
+model.add(Dense(2, activation= 'sigmoid'))
 
 # 3. 컴파일, 훈련
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])
@@ -124,11 +124,7 @@ print('걸린 시간 : ', end_time)
 print("acc : ", acc[-1])
 print("val_acc : ", val_acc[-1])
 
-# 걸린 시간 :  297.69126772880554
-# acc :  0.5020299553871155
-# val_acc :  0.49031853675842285
-
-# 걸린 시간 :  202.2950963973999
-# acc :  0.5020299553871155
-# val_acc :  0.49031853675842285
+# 걸린 시간 :  268.86843967437744
+# acc :  0.9717364311218262
+# val_acc :  0.5540287494659424
 
