@@ -134,7 +134,7 @@ model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['acc'])
 #                             validation_data=xy_test,  
 #                             validation_steps=4)  
 
-es = EarlyStopping(monitor='val_loss', patience=10, verbose=1, mode='min', verbose=1)
+es = EarlyStopping(monitor='val_loss', patience=10, verbose=1, mode='min')
 
 
 start_time = time.time()
