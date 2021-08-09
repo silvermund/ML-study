@@ -1,5 +1,5 @@
-# import numpy as np
-# from tensorflow.keras.preprocessing.image import ImageDataGenerator
+import numpy as np
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 # train_datagen = ImageDataGenerator(
 #     rescale=1./255, 
@@ -134,3 +134,7 @@ print('acc: ',results[1])
 
 # loss:  0.419383704662323
 # acc:  0.840311586856842
+
+# 걸린 시간 :  31.643054723739624
+# loss:  0.28373396396636963
+# acc:  0.9074975848197937
