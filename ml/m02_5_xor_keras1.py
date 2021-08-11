@@ -1,6 +1,6 @@
 from sklearn.svm import LinearSVC, SVC
 import numpy as np
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, r2_score
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 
@@ -26,7 +26,7 @@ print(x_data, "의 예측결과 : \n", y_predict)
 results = model.evaluate(x_data, y_data)
 print('model.score : ', results[0])
 
-acc = accuracy_score(y_data, y_predict)
-print('accuracy_score : ', acc)
+r2 = r2_score(y_data, y_predict)
+print('r2_score : ', r2)
 
 #argmax
