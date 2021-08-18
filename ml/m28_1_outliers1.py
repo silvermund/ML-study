@@ -2,6 +2,9 @@
 #1. 삭제
 #2. NaN 처리후 -> 보간 // linear
 #3. ..................(결측치 처리 방법과 유사)
+#4. scaler -> Rubsorscaler, QuartileTransformer... 등등...
+#5. 모델링 : tree 계열...DT, RF, XG, LGBM...
+
 
 import numpy as np
 aaa = np.array([1, 2, -1000, 4, 5, 6, 7, 8, 90, 100, 500])
