@@ -116,7 +116,7 @@ print(x_selfy, y_selfy)
 
 vgg16 = VGG16(weights='imagenet', include_top=False, input_shape=(150,150,3))
 
-vgg16.trainable=True
+vgg16.trainable=False
 
 model = Sequential()
 model.add(vgg16)
@@ -131,7 +131,7 @@ model.add(Dense(128, activation= 'relu'))
 model.add(Dense(32, activation= 'relu'))
 model.add(Dense(1, activation= 'sigmoid'))
 
-model.trainable=False
+model.trainable=True
 
 # 3. 컴파일, 훈련
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['acc'])
@@ -166,8 +166,15 @@ print('남자일 확률 : ', res, '%')
 # print("acc : ", acc[-1])
 # print("val_acc : ", val_acc[-1])
 
-# vgg16
+# vgg16 t/f
 # 걸린 시간 :  25.73312211036682
 # loss:  0.9696173071861267
 # acc:  0.42563483119010925
 # 남자일 확률 :  [[74.935684]] %
+
+
+# vgg16 f/t
+# 걸린 시간 :  138.63604426383972
+# loss:  0.6469401121139526
+# acc:  0.6698911786079407
+# 남자일 확률 :  [[90.829346]] %

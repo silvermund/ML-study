@@ -9,6 +9,8 @@ from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau
 from tensorflow.keras.optimizers import Adam, Adagrad, Adamax, Adadelta
 import time
 
+from tensorflow.python.keras import activations
+
 
 (x_train, y_train), (x_test, y_test) = cifar10.load_data()
 
@@ -30,16 +32,16 @@ vgg19 = VGG19(weights='imagenet', include_top=False, input_shape=(32,32,3))
 # model = VGG16()
 # model = VGG19()
 
-vgg19.trainable=True   # 가중치를 동결한다, 훈련을 동결한다
+vgg19.trainable=False  # 가중치를 동결한다, 훈련을 동결한다
 
 model = Sequential()
 model.add(vgg19)
 model.add(Flatten())
 model.add(Dense(128))
 model.add(Dense(64))
-model.add(Dense(10))
+model.add(Dense(10, activation='softmax'))
 
-# model.trainable=False  # 가중치를 동결한다, 훈련을 동결한다
+model.trainable=False  # 가중치를 동결한다, 훈련을 동결한다
 
 model.summary()
 
@@ -55,7 +57,7 @@ es = EarlyStopping(monitor='val_loss', patience=15, mode='min', verbose=1)
 
 
 start_time = time.time()
-hist = model.fit(x_train, y_train, epochs=300, batch_size=512, validation_split=0.25, callbacks=[es])
+hist = model.fit(x_train, y_train, epochs=300, batch_size=2048, validation_split=0.25, callbacks=[es])
 end_time = time.time() - start_time
 
 
@@ -72,4 +74,21 @@ print('accuracy : ', loss[1])
 # accuracy :  0.10000000149011612
 
 
-# trainable 
+# vgg19 t/t
+# ==============평가, 예측==============
+# 걸린 시간 :  99.05072283744812
+# loss :  2.302706718444824
+# accuracy :  0.10000000149011612
+
+# vgg19 t/f
+# ==============평가, 예측==============
+# 걸린 시간 :  29.8152916431427
+# loss :  41.52933120727539
+# accuracy :  0.09719999879598618
+
+# vgg19 f/t
+# ==============평가, 예측==============
+# 걸린 시간 :  252.52189588546753
+# loss :  1.1134307384490967
+# accuracy :  0.715399980545044
+
