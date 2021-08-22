@@ -24,3 +24,4 @@ irisDF['target'] = datasets.target  # 원래 y값
 iris_results = irisDF.groupby(['target', 'cluster'])['sepal width (cm)'].count()
 
 print(iris_results)
+
