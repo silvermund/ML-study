@@ -88,9 +88,12 @@ print('걸린 시간 : ', end_time)
 print('loss: ',results[0])
 print('acc: ',results[1])
 print('남자일 확률 : ', res, '%')
-print('남0, 여1 :', np.argmax(y_predict[0]))
+# print('남0, 여1 :', np.argmax(y_predict[0]))
 
-print("acc : ", acc[-1])
-print("val_acc : ", val_acc[-1])
+# print("acc : ", acc[-1])
+# print("val_acc : ", val_acc[-1])
 
-
+# 걸린 시간 :  22.714309692382812
+# loss:  4.653407573699951
+# acc:  0.42563483119010925
+# 남자일 확률 :  [[99.99988]] %
