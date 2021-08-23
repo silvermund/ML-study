@@ -63,7 +63,7 @@ def autoencoder2(hidden_layer_size): # 딥하게 구성
 
     return model
 
-model1 = autoencoder1(hidden_layer_size=128)   # pca 95% , 154
+model1 = autoencoder1(hidden_layer_size=128)  
 
 model2 = autoencoder2(hidden_layer_size=784) 
 

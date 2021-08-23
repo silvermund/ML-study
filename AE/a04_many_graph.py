@@ -70,7 +70,7 @@ outputs = [x_test, output_01, output_02, output_04,]
 for row_num, row in enumerate(axes):
     for col_num, ax in enumerate(row):
         ax.imshow(outputs[row_num][random_imgs[col_num]].reshape(28, 28),
-                cmap='gray')
+                cmap = 'gray')
         ax.grid(False)
         ax.set_xticks([])
         ax.set_yticks([])
