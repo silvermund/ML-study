@@ -9,12 +9,12 @@ y_data = [[0],[0],[0],[1],[1],[1]]                  # (6, 1)
 x = tf.compat.v1.placeholder(tf.float32, shape=[None, 2])
 y = tf.compat.v1.placeholder(tf.float32, shape=[None, 1])
 
-w = tf.Variable(tf.random.normal([2,1]), name='weight')
+W = tf.Variable(tf.random.normal([2,1]), name='weight')
 b = tf.Variable(tf.random.normal([1]), name='bias')
 
 
 # hypothesis = x * w + b
-hypothesis = tf.sigmoid(tf.matmul(x, w) + b)
+hypothesis = tf.sigmoid(tf.matmul(x, W) + b)
 
 
 # cost = tf.reduce_mean(tf.square(hypothesis-y)) # mse
