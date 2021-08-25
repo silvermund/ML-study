@@ -25,6 +25,9 @@ hypothesis = x1*w1 + x2*w2 + x3*w3 + b
 cost = tf.reduce_mean(tf.square(hypothesis-y)) # mse
 
 optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.00001)
+# optimizer = tf.train.GradientDescentOptimizer(learning_rate=1e-5)
+
+
 train = optimizer.minimize(cost)
 
 
