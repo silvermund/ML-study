@@ -69,7 +69,7 @@ layer4 = tf.sigmoid(tf.matmul(layer3, W4) + b4)
 W5 = tf.Variable(tf.random.normal([64 ,10]), name='weight')
 b5 = tf.Variable(tf.random.normal([1, 10]), name='bias')
 
-hypothesis = tf.nn.softmax(tf.matmul(x, W) + b) 
+hypothesis = tf.nn.softmax(tf.matmul(layer4, W5) + b5) 
 # layer = tf.sigmoid(tf.matmul(x, W) + b)
 
 # layers1 = tf.nn.relu(tf.matmul(x_train, W) + b)
