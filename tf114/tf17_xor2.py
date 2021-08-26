@@ -19,7 +19,7 @@ b1 = tf.Variable(tf.random.normal([3]), name='bias')
 # hypothesis = x * w + b
 layer1 = tf.sigmoid(tf.matmul(x, W1) + b1)
 
-# # 히든레이어 2
+# 히든레이어 2
 W2 = tf.Variable(tf.random.normal([3,3]), name='weight')
 b2 = tf.Variable(tf.random.normal([3]), name='bias')
 
@@ -29,14 +29,13 @@ layer2 = tf.sigmoid(tf.matmul(layer1, W2) + b2)
 W3 = tf.Variable(tf.random.normal([3,1]), name='weight')
 b3 = tf.Variable(tf.random.normal([1]), name='bias')
 
-
-# hypothesis = x * w + b
 hypothesis = tf.sigmoid(tf.matmul(layer2, W2) + b3)
+
 
 # cost = tf.reduce_mean(tf.square(hypothesis-y)) # mse
 cost = -tf.reduce_mean(y*tf.log(hypothesis)+(1-y)*tf.log(1-hypothesis)) # binary_crossentropy
 
-optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.000001)
+optimizer = tf.train.GradientDescentOptimizer(learning_rate=1)
 # optimizer = tf.train.GradientDescentOptimizer(learning_rate=1e-5)
 
 train = optimizer.minimize(cost)
