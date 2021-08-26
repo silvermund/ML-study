@@ -1,6 +1,5 @@
-
 # 실습
-# 단층 레이어
+# 멀티 레이어
 # from tensorflow.keras.datasets import mnist
 # acc 0.97이상
 
