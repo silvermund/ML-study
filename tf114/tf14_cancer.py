@@ -13,6 +13,7 @@ import tensorflow as tf
 import numpy as np
 from sklearn.model_selection import train_test_split
 
+
 # 1. 데이터
 tf.set_random_seed(66)
 
@@ -68,3 +69,17 @@ print("예측값 : \n", h[0:5], "\n 예측결과값 \n: ", c[0:5], "\n Accuracy 
 
 sess.close()
 
+# 예측값 :
+#  [[463.94742]
+#  [657.17206]
+#  [570.3449 ]
+#  [222.56598]
+#  [578.2605 ]]
+#  예측결과값
+# :  [[1.]
+#  [1.]
+#  [1.]
+#  [1.]
+#  [1.]]
+#  Accuracy
+# : 0.6274165
