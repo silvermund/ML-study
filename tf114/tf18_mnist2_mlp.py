@@ -1,26 +1,3 @@
-# 실습
-# 멀티 레이어 퍼셉트론으로 구성
-# from tensorflow.keras.datasets import mnist
-
-from keras.datasets import mnist
-import tensorflow as tf
-
-
-# 2. 모델링
-x_train = tf.compat.v1.placeholder(tf.float32, shape=[None, 28*28])
-y_train = tf.compat.v1.placeholder(tf.float32, shape=[None, 10])
-
-# 아웃풋레이어
-W = tf.Variable(tf.random.normal([28*28,1]), name='weight')
-b = tf.Variable(tf.random.normal([1]), name='bias')
-
-
-
-
-
-
-
-
 
 # 실습
 # 단층 레이어
