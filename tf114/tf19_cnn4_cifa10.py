@@ -1,3 +1,8 @@
+# 실습
+# 만들기
+
+# 0.7 이상
+
 import tensorflow as tf
 import numpy as np
 from keras.models import Sequential
@@ -6,32 +11,31 @@ tf.compat.v1.disable_eager_execution()
 print(tf.executing_eagerly()) # False
 print(tf.__version__)         # 1.14.0 -> 2.4.1
 
-
 # tf.set_random_seed(66)
 
 # 1. 데이터
-from keras.datasets import mnist
-(x_train, y_train), (x_test, y_test) = mnist.load_data()
+from keras.datasets import cifar10
+(x_train, y_train), (x_test, y_test) = cifar10.load_data()
 
 from keras.utils import to_categorical
 y_train = to_categorical(y_train)
 y_test = to_categorical(y_test)
 
-x_train = x_train.reshape(60000, 28, 28, 1).astype('float32')/255
-x_test = x_test.reshape(10000, 28, 28, 1).astype('float32')/255
+x_train = x_train.reshape(50000, 32, 32, 3).astype('float32')/255
+x_test = x_test.reshape(10000, 32, 32, 3).astype('float32')/255
 
 learning_rate = 0.0002
 training_epochs = 20
 batch_size = 100
 total_batch = int(len(x_train)/batch_size)
 
-x = tf.compat.v1.placeholder(tf.float32, [None, 28, 28, 1])
+x = tf.compat.v1.placeholder(tf.float32, [None, 32, 32, 3])
 y = tf.compat.v1.placeholder(tf.float32, [None, 10])
 
 # 2. 모델구성
 
 # layer1
-W1 = tf.compat.v1.get_variable('W1', shape=[3, 3, 1, 32])
+W1 = tf.compat.v1.get_variable('W1', shape=[3, 3, 3, 32])
                                # [kernel_size, input_shape_channel, output_filter]
 print(W1) # (3, 3, 1, 32)
 
@@ -140,6 +144,8 @@ prediction = tf.equal(tf.compat.v1.arg_max(hypothesis, 1), tf.compat.v1.argmax(y
 accuracy = tf.reduce_mean(tf.cast(prediction, tf.float32))
 print('ACC : ', sess.run(accuracy, feed_dict={x:x_test, y:y_test}))
 
-# 0.996까지 올려라
+# 0.7 이상
 
-# ACC :  0.9883
+# ACC :  0.7079
+
+
