@@ -74,6 +74,7 @@ hypothesis = tf.nn.softmax(tf.matmul(layer4, W5) + b5)
 
 # layers1 = tf.nn.relu(tf.matmul(x_train, W) + b)
 # layers2 = tf.nn.elu(tf.matmul(x_train, W) + b)
+
 # layers3 = tf.nn.selu(tf.matmul(x_train, W) + b)
 # layers4 = tf.sigmoid(tf.matmul(x_train, W) + b)
 # layers = tf.nn.dropout(layers4, keep_prob=0.3)
