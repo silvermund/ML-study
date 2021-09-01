@@ -125,7 +125,7 @@ sess.run(tf.compat.v1.global_variables_initializer())
 for epoch in range(training_epochs):
     avg_loss = 0
 
-    for i in range(total_batch):      # 몇 번 도는가? 600번
+    for i in range(total_batch):      # 몇 번 도는가? 600 번
         start = i * batch_size
         end = start + batch_size
         batch_x, batch_y = x_train[start:end], y_train[start:end]
@@ -147,5 +147,6 @@ print('ACC : ', sess.run(accuracy, feed_dict={x:x_test, y:y_test}))
 # 0.7 이상
 
 # ACC :  0.7079
+
 
 
